@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Business API — Limits & Guidelines</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', Roboto, sans-serif;
+    background: linear-gradient(135deg, #e8f5f0 0%, #f0f9f5 100%);
+    color: #1a202c;
+    padding: 30px 20px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 1150px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(18, 140, 126, 0.12);
+  }
+  .header {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 60%, #075E54 100%);
+    color: white;
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: -60px;
+    right: 200px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  .wa-logo {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+  }
+  .header-text h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .header-text p {
+    font-size: 15px;
+    opacity: 0.92;
+    font-weight: 400;
+  }
+  .lang-toggle {
+    position: absolute;
+    top: 32px;
+    right: 48px;
+    display: flex;
+    background: rgba(255,255,255,0.18);
+    border-radius: 10px;
+    padding: 4px;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+  }
+  .lang-btn {
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.75);
+    background: transparent;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .lang-btn.active {
+    background: white;
+    color: #128C7E;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .lang-btn:hover:not(.active) {
+    color: white;
+  }
+  .content { padding: 40px 48px; }
+  .section { margin-bottom: 38px; }
+  .section:last-child { margin-bottom: 0; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #128C7E;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e6f4ef;
+  }
+  .section-number {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(37, 211, 102, 0.3);
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .card {
+    background: #f8fafb;
+    border: 1px solid #e4ebef;
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: all 0.25s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(18, 140, 126, 0.12);
+    border-color: #25D366;
+    background: #fff;
+  }
+  .card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .card-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #128C7E;
+    margin-bottom: 4px;
+  }
+  .card-desc { font-size: 13px; color: #475569; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  thead {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+    color: white;
+  }
+  th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eef2f4;
+    font-size: 14px;
+  }
+  tbody tr {
+    transition: background 0.2s ease;
+  }
+  tbody tr:hover { background: #f0faf5 !important; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) { background: #fafcfc; }
+  .tier-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .tier-0 { background: #fef3c7; color: #92400e; }
+  .tier-1 { background: #dbeafe; color: #1e40af; }
+  .tier-2 { background: #e0e7ff; color: #3730a3; }
+  .tier-3 { background: #d1fae5; color: #065f46; }
+  .tier-4 { background: #fce7f3; color: #9f1239; }
+  .limit-table { width: 100%; border-collapse: collapse; }
+  .limit-table td {
+    padding: 13px 18px;
+    border-bottom: 1px solid #eef2f4;
+    font-size: 14px;
+  }
+  .limit-table td:first-child { color: #475569; width: 60%; }
+  .limit-table td:last-child {
+    font-weight: 700;
+    color: #128C7E;
+    text-align: right;
+  }
+  .note {
+    background: #fff8e1;
+    border-left: 4px solid #f59e0b;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: #78350f;
+  }
+  .note strong { color: #92400e; }
+  .note.red {
+    background: #fee2e2;
+    border-left-color: #dc2626;
+    color: #7f1d1d;
+  }
+  .note.red strong { color: #991b1b; }
+  .note.green {
+    background: #dcfce7;
+    border-left-color: #16a34a;
+    color: #14532d;
+  }
+  .note.green strong { color: #166534; }
+  .footer {
+    padding: 22px 48px;
+    background: #f8fafb;
+    border-top: 1px solid #e4ebef;
+    font-size: 12px;
+    color: #64748b;
+    text-align: center;
+  }
+  .quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .quality-card {
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.25s ease;
+    cursor: default;
+  }
+  .quality-card:hover { transform: translateY(-4px) scale(1.02); }
+  .quality-card .dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .q-green { background: #dcfce7; border: 2px solid #22c55e; }
+  .q-green .dot { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+  .q-yellow { background: #fef9c3; border: 2px solid #eab308; }
+  .q-yellow .dot { background: #eab308; box-shadow: 0 0 10px #eab308; }
+  .q-red { background: #fee2e2; border: 2px solid #ef4444; }
+  .q-red .dot { background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+  .q-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 8px 0 6px;
+  }
+  .q-desc { font-size: 13px; color: #475569; }
+  .update-list {
+    list-style: none;
+    padding: 0;
+  }
+  .update-list li {
+    padding: 12px 16px;
+    background: #f0faf5;
+    border-left: 4px solid #25D366;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  .update-list li:hover {
+    background: #dcfce7;
+    transform: translateX(4px);
+  }
+  .update-list li strong {
+    color: #128C7E;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .hidden { display: none; }
+  .tab-transition {
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+    .lang-toggle { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('zh')">繁中</button>
+      </div>
+      <div class="header-inner">
+        <svg class="wa-logo" viewBox="0 0 256 258" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="waGrad" x1="50%" x2="50%" y1="100%" y2="0%">
+              <stop offset="0%" stop-color="#1FAF38"/>
+              <stop offset="100%" stop-color="#60D669"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#waGrad)" d="M5.463 127.456c-.006 21.677 5.658 42.843 16.428 61.499L4.433 252.697l65.232-17.104a122.994 122.994 0 0 0 58.8 14.97h.054c67.815 0 123.018-55.183 123.047-123.01.013-32.867-12.775-63.773-36.009-87.025-23.23-23.25-54.125-36.061-87.043-36.076-67.823 0-123.022 55.18-123.05 123.004"/>
+          <path fill="#FFF" d="M1.07 127.416c-.007 22.457 5.86 44.38 17.014 63.704L0 257.147l67.571-17.717c18.618 10.151 39.58 15.503 60.91 15.511h.055c70.248 0 127.434-57.168 127.464-127.423.012-34.048-13.236-66.065-37.3-90.15C194.633 13.286 162.633.014 128.536 0 58.276 0 1.098 57.16 1.07 127.416m40.222 60.376-2.522-4.004c-10.605-16.864-16.204-36.352-16.196-56.364.023-58.36 47.584-105.9 106.009-105.9 28.32.012 54.933 11.044 74.955 31.073 20.02 20.03 31.04 46.65 31.033 74.962-.026 58.36-47.588 105.906-105.992 105.906h-.042c-19.014-.01-37.662-5.116-53.928-14.765l-3.872-2.295-40.09 10.513z"/>
+          <path fill="#FFF" d="M96.678 74.148c-2.386-5.303-4.897-5.41-7.166-5.503-1.858-.08-3.982-.074-6.104-.074-2.124 0-5.575.799-8.492 3.984-2.92 3.188-11.148 10.892-11.148 26.561 0 15.67 11.413 30.813 13.004 32.94 1.593 2.123 22.033 35.307 54.405 48.073 26.904 10.609 32.379 8.499 38.218 7.967 5.84-.53 18.844-7.702 21.497-15.139 2.655-7.436 2.655-13.81 1.859-15.142-.796-1.327-2.92-2.124-6.105-3.716-3.186-1.593-18.844-9.298-21.763-10.361-2.92-1.062-5.043-1.592-7.167 1.597-2.124 3.184-8.223 10.356-10.082 12.48-1.857 2.129-3.716 2.394-6.9.801-3.187-1.598-13.444-4.957-25.613-15.806-9.468-8.442-15.86-18.867-17.718-22.056-1.858-3.184-.199-4.91 1.398-6.497 1.431-1.427 3.186-3.719 4.78-5.578 1.588-1.86 2.118-3.188 3.18-5.311 1.063-2.126.531-3.986-.264-5.579-.798-1.593-6.987-17.343-9.819-23.64"/>
+        </svg>
+        <div class="header-text">
+          <h1 data-en="WhatsApp Business API" data-zh="WhatsApp Business API">WhatsApp Business API</h1>
+          <p data-en="Limits & Guidelines · Updated 2026" data-zh="限制與使用指南 · 2026 年更新">Limits & Guidelines · Updated 2026</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- Section 1: Template Storage -->
+      <div class="section">
+        <div class="section-title">
+          <div class="section-number">1</div>
+          <span data-en="Template Storage & Management" data-zh="模板儲存與管理">Template Storage & Management</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-label" data-en="Unverified Business" data-zh="未驗證商家">Unverified Business</div>
+            <div class="card-value" data-en="250 templates" data-zh="250 個模板">250 templates</div>
+            <div class="card-desc" data-en="Per WhatsApp Business Account (WABA)" data-zh="每個 WhatsApp 商業帳號（WABA）">Per WhatsApp Business Account (WABA)</div>
+          </div>
+          <div class="card">
+            <div class="card-label" data-en="Verified Business" data-zh="已驗證商家">Verified Business</div>
+            <div class="card-value" data-en="6,000 templates" data-zh="6,000 個模板">6,000 templates</div>
+            <div class="card-desc" data-en="Per WhatsApp Business Account (WABA)" data-zh="每個 WhatsApp 商業帳號（WABA）">Per WhatsApp Business Account (WABA)</div>
+          </div>
+          <div class="card">
+            <div class="card-label" data-en="Creation Rate" data-zh="建立速率">Creation Rate</div>
+            <div class="card-value" data-en="100 / hour" data-zh="每小時 100 個">100 / hour</div>
+            <div class="card-desc" data-en="Maximum new templates per WABA per hour" data-zh="每個 WABA 每小時最多建立的新模板數">Maximum new templates per WABA per hour</div>
+          </div>
+          <div class="card">
+            <div class="card-label" data-en="Editing Limits" data-zh="編輯限制">Editing Limits</div>
+            <div class="card-value" data-en="10 edits / 30 days" data-zh="30 天內 10 次">10 edits / 30 days</div>
+            <div class="card-desc" data-en="Approved templates — max once every 24 hours" data-zh="已核准的模板，每 24 小時最多編輯一次">Approved templates — max once every 24 hours</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Messaging Volume Tiers -->
+      <div class="section">
+        <div class="section-title">
+          <div class="section-number">2</div>
+          <span data-en="Messaging Volume Tiers (Daily Limits)" data-zh="訊息發送層級（每日上限）">Messaging Volume Tiers (Daily Limits)</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th data-en="Tier" data-zh="層級">Tier</th>
+              <th data-en="Unique Users / 24h" data-zh="每 24 小時可發送的獨立用戶數">Unique Users / 24h</th>
+              <th data-en="Status Requirement" data-zh="狀態要求">Status Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tier-badge tier-0">Tier 0</span></td>
+              <td><strong>250</strong></td>
+              <td data-en="Unverified" data-zh="未驗證">Unverified</td>
+            </tr>
+            <tr>
+              <td><span class="tier-badge tier-1">Tier 1</span></td>
+              <td><strong>1,000</strong></td>
+              <td data-en="Verified" data-zh="已驗證">Verified</td>
+            </tr>
+            <tr>
+              <td><span class="tier-badge tier-2">Tier 2</span></td>
+              <td><strong>10,000</strong></td>
+              <td data-en="Scaling based on quality" data-zh="依品質評級擴展">Scaling based on quality</td>
+            </tr>
+            <tr>
+              <td><span class="tier-badge tier-3">Tier 3</span></td>
+              <td><strong>100,000</strong></td>
+              <td data-en="Established quality" data-zh="品質穩定良好">Established quality</td>
+            </tr>
+            <tr>
+              <td><span class="tier-badge tier-4">Tier 4</span></td>
+              <td><strong data-en="Unlimited" data-zh="無上限">Unlimited</strong></td>
+              <td data-en="Enterprise level" data-zh="企業級">Enterprise level</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <strong data-en="Note:" data-zh="備註：">Note:</strong>
+          <span data-en=" As of October 2025, limits are applied per Business Portfolio rather than per phone number. Individual users may be capped at ~2 marketing messages per day from all businesses combined (frequency capping)." data-zh=" 自 2025 年 10 月起，限制以「商業資產組合（Business Portfolio）」為單位，而非單一電話號碼。個別用戶每日從所有商家合計僅能收到約 2 則行銷訊息（頻率限制）。"> As of October 2025, limits are applied per Business Portfolio rather than per phone number. Individual users may be capped at ~2 marketing messages per day from all businesses combined (frequency capping).</span>
+        </div>
+      </div>
+
+      <!-- Section 3: Template Content Limits -->
+      <div class="section">
+        <div class="section-title">
+          <div class="section-number">3</div>
+          <span data-en="Template Content & Character Limits" data-zh="模板內容與字數限制">Template Content & Character Limits</span>
+        </div>
+        <table class="limit-table">
+          <tbody>
+            <tr>
+              <td data-en="📝 Body Text" data-zh="📝 內文">📝 Body Text</td>
+              <td data-en="1,024 characters" data-zh="1,024 字數">1,024 characters</td>
+            </tr>
+            <tr>
+              <td data-en="📌 Header (Text)" data-zh="📌 標題（文字）">📌 Header (Text)</td>
+              <td data-en="60 characters" data-zh="60 字數">60 characters</td>
+            </tr>
+            <tr>
+              <td data-en="📎 Footer" data-zh="📎 頁尾">📎 Footer</td>
+              <td data-en="60 characters" data-zh="60 字數">60 characters</td>
+            </tr>
+            <tr>
+              <td data-en="🔘 Button Label Text" data-zh="🔘 按鈕文字">🔘 Button Label Text</td>
+              <td data-en="25 characters" data-zh="25 字數">25 characters</td>
+            </tr>
+            <tr>
+              <td data-en="🔘 Buttons Per Template (Quick Reply + CTA combined)" data-zh="🔘 每個模板按鈕數量（快速回覆 + CTA 合計）">🔘 Buttons Per Template (Quick Reply + CTA combined)</td>
+              <td data-en="Up to 10" data-zh="最多 10 個">Up to 10</td>
+            </tr>
+            <tr>
+              <td data-en="🏷️ Template Name (lowercase alphanumeric + underscores)" data-zh="🏷️ 模板名稱（僅限小寫英數字與底線）">🏷️ Template Name (lowercase alphanumeric + underscores)</td>
+              <td data-en="512 characters" data-zh="512 字數">512 characters</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 4: Throughput -->
+      <div class="section">
+        <div class="section-title">
+          <div class="section-number">4</div>
+          <span data-en="Sending Throughput (Speed)" data-zh="發送速度（Throughput）">Sending Throughput (Speed)</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-label" data-en="Standard Throughput" data-zh="標準發送速度">Standard Throughput</div>
+            <div class="card-value">~80 MPS</div>
+            <div class="card-desc" data-en="Messages per second — default for most accounts" data-zh="每秒訊息數 — 多數帳號預設值">Messages per second — default for most accounts</div>
+          </div>
+          <div class="card">
+            <div class="card-label" data-en="Enterprise (Tier 4)" data-zh="企業級（Tier 4）">Enterprise (Tier 4)</div>
+            <div class="card-value" data-en="Up to 1,000 MPS" data-zh="最高 1,000 MPS">Up to 1,000 MPS</div>
+            <div class="card-desc" data-en="Automatically upgraded for Tier 4 accounts" data-zh="Tier 4 帳號自動升級">Automatically upgraded for Tier 4 accounts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Quality Rating -->
+      <div class="section">
+        <div class="section-title">
+          <div class="section-number">5</div>
+          <span data-en="Quality Rating" data-zh="品質評級">Quality Rating</span>
+        </div>
+        <div class="quality-grid">
+          <div class="quality-card q-green">
+            <span class="dot"></span>
+            <span style="font-weight:700;color:#166534" data-en="Green (High)" data-zh="綠燈（高）">Green (High)</span>
+            <div class="q-title" data-en="Healthy" data-zh="健康">Healthy</div>
+            <div class="q-desc" data-en="Low block/spam rate. Eligible to scale tier up." data-zh="封鎖／檢舉率低，可繼續升級至更高層級。">Low block/spam rate. Eligible to scale tier up.</div>
+          </div>
+          <div class="quality-card q-yellow">
+            <span class="dot"></span>
+            <span style="font-weight:700;color:#854d0e" data-en="Yellow (Medium)" data-zh="黃燈（中）">Yellow (Medium)</span>
+            <div class="q-title" data-en="Warning" data-zh="警告">Warning</div>
+            <div class="q-desc" data-en="Quality drop detected. Review templates and sending patterns." data-zh="品質下滑，請檢視模板內容與發送策略。">Quality drop detected. Review templates and sending patterns.</div>
+          </div>
+          <div class="quality-card q-red">
+            <span class="dot"></span>
+            <span style="font-weight:700;color:#991b1b" data-en="Red (Low)" data-zh="紅燈（低）">Red (Low)</span>
+            <div class="q-title" data-en="Critical" data-zh="危險">Critical</div>
+            <div class="q-desc" data-en="High block/spam rate. Cannot advance to next tier." data-zh="封鎖／檢舉率過高，無法升級至下一層級。">High block/spam rate. Cannot advance to next tier.</div>
+          </div>
+        </div>
+        <div class="note green">
+          <strong data-en="2026 Update:" data-zh="2026 更新：">2026 Update:</strong>
+          <span data-en=" A Red rating no longer automatically downgrades your limit — as long as there are no policy violations. It only blocks upward tier advancement." data-zh=" 若無違規，紅燈評級不再自動下調發送上限，但仍會阻擋向上升級。"> A Red rating no longer automatically downgrades your limit — as long as there are no policy violations. It only blocks upward tier advancement.</span>
+        </div>
+      </div>
+
+      <!-- Section 6: Template Categories (Meta Official) -->
+      <div class="section">
+        <div class="section-title">
+          <div class="section-number">6</div>
+          <span data-en="Template Categories (Meta Official Guidelines)" data-zh="模板類別（Meta 官方指南）">Template Categories (Meta Official Guidelines)</span>
+        </div>
+        <div class="grid-3" style="margin-bottom:16px;">
+          <div class="card" style="border-top:4px solid #ec4899;">
+            <div class="card-label" style="color:#be185d;">📢 <span data-en="Marketing" data-zh="行銷（Marketing）">Marketing</span></div>
+            <div class="card-value" style="font-size:15px;color:#be185d;line-height:1.4;margin-top:6px;" data-en="Promotions, offers, launches, retargeting" data-zh="促銷、優惠、新品、再行銷">Promotions, offers, launches, retargeting</div>
+            <div class="card-desc" style="margin-top:10px;" data-en="Examples: sale announcements, coupons, abandoned cart, newsletters, product launches, cross-sells." data-zh="範例：促銷通知、優惠券、購物車挽回、電子報、新品上架、交叉推薦。">Examples: sale announcements, coupons, abandoned cart, newsletters, product launches, cross-sells.</div>
+          </div>
+          <div class="card" style="border-top:4px solid #3b82f6;">
+            <div class="card-label" style="color:#1e40af;">⚙️ <span data-en="Utility" data-zh="實用（Utility）">Utility</span></div>
+            <div class="card-value" style="font-size:15px;color:#1e40af;line-height:1.4;margin-top:6px;" data-en="Transaction / account updates triggered by user" data-zh="交易或帳戶通知，由用戶動作觸發">Transaction / account updates triggered by user</div>
+            <div class="card-desc" style="margin-top:10px;" data-en="Examples: order confirmation, shipping update, payment receipt, appointment reminder, account alerts." data-zh="範例：訂單確認、出貨通知、付款收據、預約提醒、帳戶異動通知。">Examples: order confirmation, shipping update, payment receipt, appointment reminder, account alerts.</div>
+          </div>
+          <div class="card" style="border-top:4px solid #8b5cf6;">
+            <div class="card-label" style="color:#6b21a8;">🔐 <span data-en="Authentication" data-zh="驗證（Authentication）">Authentication</span></div>
+            <div class="card-value" style="font-size:15px;color:#6b21a8;line-height:1.4;margin-top:6px;" data-en="One-time passcodes for identity verification only" data-zh="一次性密碼（OTP），僅用於身份驗證">One-time passcodes for identity verification only</div>
+            <div class="card-desc" style="margin-top:10px;" data-en="Must use Cloud API Template Library. Supports copy-code or one-tap OTP button. Marketing/Utility cannot send OTPs." data-zh="必須使用 Cloud API Template Library，支援複製驗證碼或一鍵驗證按鈕。行銷／實用類模板不可發送 OTP。">Must use Cloud API Template Library. Supports copy-code or one-tap OTP button. Marketing/Utility cannot send OTPs.</div>
+          </div>
+        </div>
+
+        <table style="margin-top:10px;">
+          <thead>
+            <tr>
+              <th data-en="⚠️ Common Miscategorization Mistakes" data-zh="⚠️ 常見分類錯誤">⚠️ Common Miscategorization Mistakes</th>
+              <th data-en="What Meta Does" data-zh="Meta 的處理方式">What Meta Does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-en='Adding "Check out our new items" to a receipt (Utility template)' data-zh='在收據（實用模板）加入「查看最新商品」字樣'>Adding "Check out our new items" to a receipt (Utility template)</td>
+              <td data-en="Auto-reclassified as Marketing → higher cost" data-zh="自動歸類為行銷 → 費用提高">Auto-reclassified as Marketing → higher cost</td>
+            </tr>
+            <tr>
+              <td data-en="Including promotional CTAs inside support/service messages" data-zh="在客服／服務訊息中加入促銷連結或按鈕">Including promotional CTAs inside support/service messages</td>
+              <td data-en="Template rejected or reclassified" data-zh="模板被駁回或重新分類">Template rejected or reclassified</td>
+            </tr>
+            <tr>
+              <td data-en="Using Utility template to send OTP / verification code" data-zh="使用實用模板發送 OTP／驗證碼">Using Utility template to send OTP / verification code</td>
+              <td data-en="Blocked — only Authentication category allowed" data-zh="封鎖 — 僅驗證類模板可發送">Blocked — only Authentication category allowed</td>
+            </tr>
+            <tr>
+              <td data-en="Promotional intent not 'specific to user action'" data-zh="內容不符「針對用戶動作觸發」的規則">Promotional intent not 'specific to user action'</td>
+              <td data-en="Fails utility test → Marketing category" data-zh="無法通過實用類驗證 → 歸為行銷">Fails utility test → Marketing category</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note red">
+          <strong data-en="April 2025 Enforcement:" data-zh="2025 年 4 月起實施：">April 2025 Enforcement:</strong>
+          <span data-en=" If a business selects UTILITY but Meta determines it should be MARKETING, the template is auto-approved as MARKETING (different pricing). For businesses abusing the categorization system, the prior 24-hour notice before reclassification is NO LONGER given — effective April 16, 2025." data-zh=" 若商家選擇 UTILITY 但 Meta 判定為 MARKETING，模板會直接改以 MARKETING 核准（收費不同）。對於濫用分類系統的商家，自 2025 年 4 月 16 日起，不再提供先前的 24 小時預告。"> If a business selects UTILITY but Meta determines it should be MARKETING, the template is auto-approved as MARKETING (different pricing). For businesses abusing the categorization system, the prior 24-hour notice before reclassification is NO LONGER given — effective April 16, 2025.</span>
+        </div>
+
+        <div class="note">
+          <strong data-en="📄 Official Meta Documentation:" data-zh="📄 Meta 官方文件：">📄 Official Meta Documentation:</strong>
+          <span data-en=" " data-zh=" "> </span>
+          <a href="https://developers.facebook.com/docs/whatsapp/updates-to-pricing/new-template-guidelines/" target="_blank" style="color:#128C7E;font-weight:600;text-decoration:underline;">developers.facebook.com/docs/whatsapp/updates-to-pricing/new-template-guidelines</a>
+          <span data-en=" · Utility template rules: " data-zh="　·　實用類模板規則："> · Utility template rules: </span>
+          <a href="https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates/" target="_blank" style="color:#128C7E;font-weight:600;text-decoration:underline;">Message Templates API</a>
+        </div>
+      </div>
+
+      <!-- Section 7: 2026 Key Updates -->
+      <div class="section">
+        <div class="section-title">
+          <div class="section-number">7</div>
+          <span data-en="2026 Key Updates & Compliance" data-zh="2026 重要更新與合規事項">2026 Key Updates & Compliance</span>
+        </div>
+        <ul class="update-list">
+          <li>
+            <strong data-en="🚀 Fast-Track to 100K Limit" data-zh="🚀 直升 100K 訊息上限">🚀 Fast-Track to 100K Limit</strong>
+            <span data-en="Once a business completes Business Verification or the Quality scaling path, the 100K daily messaging limit is granted immediately. Rollout began Q1 2026, with pacing restrictions fully removed Q2 2026." data-zh="完成商家驗證或通過品質擴展路徑後，可立即獲得 10 萬則／日上限。2026 第一季開始推出，第二季全面取消 pacing 限制。">Once a business completes Business Verification or the Quality scaling path, the 100K daily messaging limit is granted immediately. Rollout began Q1 2026, with pacing restrictions fully removed Q2 2026.</span>
+          </li>
+          <li>
+            <strong data-en="🚫 General Purpose AI Chatbots Banned" data-zh="🚫 禁止通用型 AI 聊天機器人">🚫 General Purpose AI Chatbots Banned</strong>
+            <span data-en="Since January 15, 2026, Meta has banned General Purpose AI Chatbots on WhatsApp to keep the platform focused as a business channel. Business-specific AI is still allowed." data-zh="自 2026 年 1 月 15 日起，Meta 禁止通用型 AI 聊天機器人進駐 WhatsApp，以維持其商業通訊定位。特定商家用途的 AI 仍允許使用。">Since January 15, 2026, Meta has banned General Purpose AI Chatbots on WhatsApp to keep the platform focused as a business channel. Business-specific AI is still allowed.</span>
+          </li>
+          <li>
+            <strong data-en="🇺🇸 US (+1) Marketing Templates Blocked" data-zh="🇺🇸 美國（+1）行銷模板封鎖中">🇺🇸 US (+1) Marketing Templates Blocked</strong>
+            <span data-en="Since April 2025, marketing templates to US +1 numbers are not delivered. Utility and authentication templates continue to work normally." data-zh="自 2025 年 4 月起，發送至美國 +1 號碼的行銷模板將無法送達。實用型（Utility）與驗證型（Authentication）模板仍可正常使用。">Since April 2025, marketing templates to US +1 numbers are not delivered. Utility and authentication templates continue to work normally.</span>
+          </li>
+          <li>
+            <strong data-en="⏱️ Per-User Marketing Cap" data-zh="⏱️ 每位用戶行銷訊息上限">⏱️ Per-User Marketing Cap</strong>
+            <span data-en="Select countries enforce a limit of 1 marketing template per 24 hours to the same recipient. Combined with global frequency capping (~2 marketing msgs/day total)." data-zh="部分國家規定同一收件人 24 小時內僅能收到 1 則行銷模板，再加上全球頻率限制（每日合計約 2 則行銷訊息）。">Select countries enforce a limit of 1 marketing template per 24 hours to the same recipient. Combined with global frequency capping (~2 marketing msgs/day total).</span>
+          </li>
+          <li>
+            <strong data-en="⚠️ Category Mismatch = Rejection" data-zh="⚠️ 類別不符 = 自動駁回">⚠️ Category Mismatch = Rejection</strong>
+            <span data-en="Promotional content inside Utility templates will be rejected. Template category must match the actual content — Meta actively enforces this." data-zh="若實用型模板內含促銷內容，將被自動駁回。模板類別必須與實際內容相符，Meta 會嚴格審查。">Promotional content inside Utility templates will be rejected. Template category must match the actual content — Meta actively enforces this.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <span data-en="Source: Meta for Developers — WhatsApp Business Platform Documentation · Prepared by ChatDaddy CS" data-zh="資料來源：Meta for Developers — WhatsApp Business Platform 官方文件 · ChatDaddy CS 整理">Source: Meta for Developers — WhatsApp Business Platform Documentation · Prepared by ChatDaddy CS</span>
+    </div>
+  </div>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + lang);
+      el.classList.remove('tab-transition');
+      void el.offsetWidth;
+      el.classList.add('tab-transition');
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+  }
+</script>
+</body>
+</html>
