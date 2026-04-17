@@ -25,119 +25,98 @@
   .header {
     background: linear-gradient(135deg, #25D366 0%, #128C7E 60%, #075E54 100%);
     color: white;
-    padding: 40px 48px;
+    padding: 44px 48px;
     position: relative;
     overflow: hidden;
   }
   .header::before {
     content: "";
     position: absolute;
-    top: -100px;
-    right: -100px;
-    width: 300px;
-    height: 300px;
+    top: -100px; right: -100px;
+    width: 300px; height: 300px;
     background: rgba(255,255,255,0.06);
-    border-radius: 50%;
-  }
-  .header::after {
-    content: "";
-    position: absolute;
-    bottom: -60px;
-    right: 200px;
-    width: 150px;
-    height: 150px;
-    background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
   .header-inner {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 22px;
     position: relative;
     z-index: 2;
   }
   .wa-logo {
-    width: 72px;
-    height: 72px;
+    width: 80px; height: 80px;
     flex-shrink: 0;
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
   }
   .header-text h1 {
-    font-size: 30px;
+    font-size: 34px;
     font-weight: 800;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     letter-spacing: -0.3px;
   }
-  .header-text p {
-    font-size: 15px;
-    opacity: 0.92;
-    font-weight: 400;
+  .header-sub {
+    font-size: 16px;
+    opacity: 0.95;
+    font-weight: 500;
   }
-  .lang-toggle {
-    position: absolute;
-    top: 32px;
-    right: 48px;
-    display: flex;
-    background: rgba(255,255,255,0.18);
-    border-radius: 10px;
-    padding: 4px;
-    backdrop-filter: blur(10px);
-    z-index: 3;
+  .header-zh {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-top: 4px;
   }
-  .lang-btn {
-    padding: 7px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.75);
-    background: transparent;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .lang-btn.active {
-    background: white;
-    color: #128C7E;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-  }
-  .lang-btn:hover:not(.active) {
-    color: white;
-  }
-  .content { padding: 40px 48px; }
-  .section { margin-bottom: 38px; }
+  .content { padding: 44px 48px; }
+  .section { margin-bottom: 42px; }
   .section:last-child { margin-bottom: 0; }
+
+  /* Bilingual pattern */
+  .bi { line-height: 1.6; }
+  .bi .zh {
+    color: #94a3b8;
+    font-size: 0.82em;
+    display: block;
+    margin-top: 1px;
+    line-height: 1.4;
+  }
   .section-title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
     color: #128C7E;
-    margin-bottom: 18px;
-    padding-bottom: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
     border-bottom: 2px solid #e6f4ef;
+  }
+  .section-title .zh {
+    font-size: 14px;
+    color: #64948b;
+    font-weight: 500;
+    display: block;
+    margin-top: 2px;
   }
   .section-number {
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 34px; height: 34px;
     border-radius: 9px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
     box-shadow: 0 2px 6px rgba(37, 211, 102, 0.3);
   }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .card {
     background: #f8fafb;
     border: 1px solid #e4ebef;
     border-radius: 12px;
-    padding: 18px 20px;
+    padding: 20px 22px;
     transition: all 0.25s ease;
     cursor: default;
   }
@@ -148,20 +127,26 @@
     background: #fff;
   }
   .card-label {
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #64748b;
     font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .card-value {
-    font-size: 22px;
-    font-weight: 700;
-    color: #128C7E;
     margin-bottom: 4px;
   }
-  .card-desc { font-size: 13px; color: #475569; }
+  .card-label .zh { font-size: 11px; text-transform: none; color: #94a3b8; display: inline; margin-left: 6px; }
+  .card-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #128C7E;
+    margin-bottom: 6px;
+  }
+  .card-value .zh { font-size: 14px; color: #64948b; display: inline; margin-left: 8px; font-weight: 500; }
+  .card-desc {
+    font-size: 13px;
+    color: #475569;
+  }
+  .card-desc .zh { font-size: 12px; color: #94a3b8; display: block; margin-top: 2px; }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -182,14 +167,14 @@
     text-transform: uppercase;
     letter-spacing: 0.3px;
   }
+  th .zh { font-size: 11px; font-weight: 400; opacity: 0.8; text-transform: none; margin-left: 6px; }
   td {
     padding: 14px 18px;
     border-bottom: 1px solid #eef2f4;
-    font-size: 14px;
+    font-size: 15px;
   }
-  tbody tr {
-    transition: background 0.2s ease;
-  }
+  td .zh { color: #94a3b8; font-size: 12px; display: block; margin-top: 1px; }
+  tbody tr { transition: background 0.2s ease; }
   tbody tr:hover { background: #f0faf5 !important; }
   tbody tr:last-child td { border-bottom: none; }
   tbody tr:nth-child(even) { background: #fafcfc; }
@@ -209,43 +194,60 @@
   .limit-table td {
     padding: 13px 18px;
     border-bottom: 1px solid #eef2f4;
-    font-size: 14px;
+    font-size: 15px;
   }
-  .limit-table td:first-child { color: #475569; width: 60%; }
+  .limit-table td:first-child { color: #475569; width: 58%; }
   .limit-table td:last-child {
     font-weight: 700;
     color: #128C7E;
     text-align: right;
+    font-size: 15px;
   }
+  .limit-table td:last-child .zh { font-weight: 500; }
+  .sub-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #475569;
+    margin: 22px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .sub-label:first-of-type { margin-top: 6px; }
+  .sub-label .zh { font-size: 12px; text-transform: none; color: #94a3b8; margin-left: 8px; }
   .note {
     background: #fff8e1;
     border-left: 4px solid #f59e0b;
-    padding: 14px 18px;
+    padding: 16px 20px;
     border-radius: 8px;
     margin-top: 14px;
-    font-size: 13px;
+    font-size: 14px;
     color: #78350f;
+    line-height: 1.6;
   }
   .note strong { color: #92400e; }
+  .note .zh { font-size: 12px; color: #a3856e; display: block; margin-top: 4px; }
   .note.red {
     background: #fee2e2;
     border-left-color: #dc2626;
     color: #7f1d1d;
   }
   .note.red strong { color: #991b1b; }
+  .note.red .zh { color: #b07878; }
   .note.green {
     background: #dcfce7;
     border-left-color: #16a34a;
     color: #14532d;
   }
   .note.green strong { color: #166534; }
+  .note.green .zh { color: #6b9e7b; }
   .footer {
-    padding: 22px 48px;
+    padding: 24px 48px;
     background: #f8fafb;
     border-top: 1px solid #e4ebef;
     font-size: 12px;
     color: #64748b;
     text-align: center;
+    line-height: 1.8;
   }
   .quality-grid {
     display: grid;
@@ -253,7 +255,7 @@
     gap: 14px;
   }
   .quality-card {
-    padding: 18px;
+    padding: 20px;
     border-radius: 12px;
     text-align: center;
     transition: transform 0.25s ease;
@@ -273,24 +275,20 @@
   .q-yellow .dot { background: #eab308; box-shadow: 0 0 10px #eab308; }
   .q-red { background: #fee2e2; border: 2px solid #ef4444; }
   .q-red .dot { background: #ef4444; box-shadow: 0 0 10px #ef4444; }
-  .q-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin: 8px 0 6px;
-  }
+  .q-title { font-size: 17px; font-weight: 700; margin: 8px 0 6px; }
+  .q-title .zh { font-size: 13px; font-weight: 500; color: #64748b; margin-left: 6px; }
   .q-desc { font-size: 13px; color: #475569; }
-  .update-list {
-    list-style: none;
-    padding: 0;
-  }
+  .q-desc .zh { color: #94a3b8; font-size: 12px; display: block; margin-top: 3px; }
+  .update-list { list-style: none; padding: 0; }
   .update-list li {
-    padding: 12px 16px;
+    padding: 14px 18px;
     background: #f0faf5;
     border-left: 4px solid #25D366;
     margin-bottom: 8px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 15px;
     transition: all 0.2s ease;
+    line-height: 1.6;
   }
   .update-list li:hover {
     background: #dcfce7;
@@ -299,30 +297,21 @@
   .update-list li strong {
     color: #128C7E;
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    font-size: 15px;
   }
-  .hidden { display: none; }
-  .tab-transition {
-    animation: fadeIn 0.3s ease;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .update-list li strong .zh { font-size: 13px; font-weight: 500; color: #64948b; margin-left: 8px; }
+  .update-list li .zh { font-size: 12px; color: #94a3b8; display: block; margin-top: 4px; }
+  .cat-card .card-desc .zh { font-size: 11px; }
   @media print {
     body { background: white; padding: 0; }
     .container { box-shadow: none; }
-    .lang-toggle { display: none; }
   }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <div class="lang-toggle">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" onclick="setLang('zh')">繁中</button>
-      </div>
       <div class="header-inner">
         <svg class="wa-logo" viewBox="0 0 256 258" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -336,348 +325,348 @@
           <path fill="#FFF" d="M96.678 74.148c-2.386-5.303-4.897-5.41-7.166-5.503-1.858-.08-3.982-.074-6.104-.074-2.124 0-5.575.799-8.492 3.984-2.92 3.188-11.148 10.892-11.148 26.561 0 15.67 11.413 30.813 13.004 32.94 1.593 2.123 22.033 35.307 54.405 48.073 26.904 10.609 32.379 8.499 38.218 7.967 5.84-.53 18.844-7.702 21.497-15.139 2.655-7.436 2.655-13.81 1.859-15.142-.796-1.327-2.92-2.124-6.105-3.716-3.186-1.593-18.844-9.298-21.763-10.361-2.92-1.062-5.043-1.592-7.167 1.597-2.124 3.184-8.223 10.356-10.082 12.48-1.857 2.129-3.716 2.394-6.9.801-3.187-1.598-13.444-4.957-25.613-15.806-9.468-8.442-15.86-18.867-17.718-22.056-1.858-3.184-.199-4.91 1.398-6.497 1.431-1.427 3.186-3.719 4.78-5.578 1.588-1.86 2.118-3.188 3.18-5.311 1.063-2.126.531-3.986-.264-5.579-.798-1.593-6.987-17.343-9.819-23.64"/>
         </svg>
         <div class="header-text">
-          <h1 data-en="WhatsApp Business API" data-zh="WhatsApp Business API">WhatsApp Business API</h1>
-          <p data-en="Limits & Guidelines · Updated 2026" data-zh="限制與使用指南 · 2026 年更新">Limits & Guidelines · Updated 2026</p>
+          <h1>WhatsApp Business API</h1>
+          <div class="header-sub">Limits & Guidelines &middot; Updated 2026</div>
+          <div class="header-zh">限制與使用指南 &middot; 2026 年更新</div>
         </div>
       </div>
     </div>
 
     <div class="content">
 
-      <!-- Section 1: Template Storage -->
+      <!-- Section 1 -->
       <div class="section">
         <div class="section-title">
           <div class="section-number">1</div>
-          <span data-en="Template Storage & Management" data-zh="模板儲存與管理">Template Storage & Management</span>
+          <div>Template Storage & Management<span class="zh">模板儲存與管理</span></div>
         </div>
         <div class="grid-2">
           <div class="card">
-            <div class="card-label" data-en="Unverified Business" data-zh="未驗證商家">Unverified Business</div>
-            <div class="card-value" data-en="250 templates" data-zh="250 個模板">250 templates</div>
-            <div class="card-desc" data-en="Per WhatsApp Business Account (WABA)" data-zh="每個 WhatsApp 商業帳號（WABA）">Per WhatsApp Business Account (WABA)</div>
+            <div class="card-label">Unverified Business <span class="zh">未驗證商家</span></div>
+            <div class="card-value">250 templates <span class="zh">個模板</span></div>
+            <div class="card-desc">Per WhatsApp Business Account (WABA)<span class="zh">每個 WhatsApp 商業帳號（WABA）</span></div>
           </div>
           <div class="card">
-            <div class="card-label" data-en="Verified Business" data-zh="已驗證商家">Verified Business</div>
-            <div class="card-value" data-en="6,000 templates" data-zh="6,000 個模板">6,000 templates</div>
-            <div class="card-desc" data-en="Per WhatsApp Business Account (WABA)" data-zh="每個 WhatsApp 商業帳號（WABA）">Per WhatsApp Business Account (WABA)</div>
+            <div class="card-label">Verified Business <span class="zh">已驗證商家</span></div>
+            <div class="card-value">6,000 templates <span class="zh">個模板</span></div>
+            <div class="card-desc">Per WhatsApp Business Account (WABA)<span class="zh">每個 WhatsApp 商業帳號（WABA）</span></div>
           </div>
           <div class="card">
-            <div class="card-label" data-en="Creation Rate" data-zh="建立速率">Creation Rate</div>
-            <div class="card-value" data-en="100 / hour" data-zh="每小時 100 個">100 / hour</div>
-            <div class="card-desc" data-en="Maximum new templates per WABA per hour" data-zh="每個 WABA 每小時最多建立的新模板數">Maximum new templates per WABA per hour</div>
+            <div class="card-label">Creation Rate <span class="zh">建立速率</span></div>
+            <div class="card-value">100 / hour <span class="zh">每小時</span></div>
+            <div class="card-desc">Maximum new templates per WABA per hour<span class="zh">每個 WABA 每小時最多建立的新模板數</span></div>
           </div>
           <div class="card">
-            <div class="card-label" data-en="Editing Limits" data-zh="編輯限制">Editing Limits</div>
-            <div class="card-value" data-en="10 edits / 30 days" data-zh="30 天內 10 次">10 edits / 30 days</div>
-            <div class="card-desc" data-en="Approved templates — max once every 24 hours" data-zh="已核准的模板，每 24 小時最多編輯一次">Approved templates — max once every 24 hours</div>
+            <div class="card-label">Editing Limits <span class="zh">編輯限制</span></div>
+            <div class="card-value">10 edits / 30 days <span class="zh">30 天內 10 次</span></div>
+            <div class="card-desc">Approved templates — max once every 24 hours<span class="zh">已核准的模板，每 24 小時最多編輯一次</span></div>
           </div>
         </div>
       </div>
 
-      <!-- Section 2: Messaging Volume Tiers -->
+      <!-- Section 2 -->
       <div class="section">
         <div class="section-title">
           <div class="section-number">2</div>
-          <span data-en="Messaging Volume Tiers (Daily Limits)" data-zh="訊息發送層級（每日上限）">Messaging Volume Tiers (Daily Limits)</span>
+          <div>Messaging Volume Tiers (Daily Limits)<span class="zh">訊息發送層級（每日上限）</span></div>
         </div>
         <table>
           <thead>
             <tr>
-              <th data-en="Tier" data-zh="層級">Tier</th>
-              <th data-en="Unique Users / 24h" data-zh="每 24 小時可發送的獨立用戶數">Unique Users / 24h</th>
-              <th data-en="Status Requirement" data-zh="狀態要求">Status Requirement</th>
+              <th>Tier <span class="zh">層級</span></th>
+              <th>Unique Users / 24h <span class="zh">每 24 小時獨立用戶數</span></th>
+              <th>Requirement <span class="zh">狀態要求</span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><span class="tier-badge tier-0">Tier 0</span></td>
               <td><strong>250</strong></td>
-              <td data-en="Unverified" data-zh="未驗證">Unverified</td>
+              <td>Unverified<span class="zh">未驗證</span></td>
             </tr>
             <tr>
               <td><span class="tier-badge tier-1">Tier 1</span></td>
               <td><strong>1,000</strong></td>
-              <td data-en="Verified" data-zh="已驗證">Verified</td>
+              <td>Verified<span class="zh">已驗證</span></td>
             </tr>
             <tr>
               <td><span class="tier-badge tier-2">Tier 2</span></td>
               <td><strong>10,000</strong></td>
-              <td data-en="Scaling based on quality" data-zh="依品質評級擴展">Scaling based on quality</td>
+              <td>Scaling based on quality<span class="zh">依品質評級擴展</span></td>
             </tr>
             <tr>
               <td><span class="tier-badge tier-3">Tier 3</span></td>
               <td><strong>100,000</strong></td>
-              <td data-en="Established quality" data-zh="品質穩定良好">Established quality</td>
+              <td>Established quality<span class="zh">品質穩定良好</span></td>
             </tr>
             <tr>
               <td><span class="tier-badge tier-4">Tier 4</span></td>
-              <td><strong data-en="Unlimited" data-zh="無上限">Unlimited</strong></td>
-              <td data-en="Enterprise level" data-zh="企業級">Enterprise level</td>
+              <td><strong>Unlimited</strong></td>
+              <td>Enterprise level<span class="zh">企業級</span></td>
             </tr>
           </tbody>
         </table>
         <div class="note">
-          <strong data-en="Note:" data-zh="備註：">Note:</strong>
-          <span data-en=" As of October 2025, limits are applied per Business Portfolio rather than per phone number. Individual users may be capped at ~2 marketing messages per day from all businesses combined (frequency capping)." data-zh=" 自 2025 年 10 月起，限制以「商業資產組合（Business Portfolio）」為單位，而非單一電話號碼。個別用戶每日從所有商家合計僅能收到約 2 則行銷訊息（頻率限制）。"> As of October 2025, limits are applied per Business Portfolio rather than per phone number. Individual users may be capped at ~2 marketing messages per day from all businesses combined (frequency capping).</span>
+          <strong>Note:</strong> As of October 2025, limits are applied per Business Portfolio rather than per phone number. Individual users may be capped at ~2 marketing messages per day from all businesses combined (frequency capping).
+          <span class="zh">備註：自 2025 年 10 月起，限制以「商業資產組合（Business Portfolio）」為單位，而非單一電話號碼。個別用戶每日從所有商家合計僅能收到約 2 則行銷訊息（頻率限制）。</span>
         </div>
       </div>
 
-      <!-- Section 3: Template Content Limits -->
+      <!-- Section 3 -->
       <div class="section">
         <div class="section-title">
           <div class="section-number">3</div>
-          <span data-en="Template Content & Character Limits" data-zh="模板內容與字數限制">Template Content & Character Limits</span>
+          <div>Template Content & Character Limits<span class="zh">模板內容與字數限制</span></div>
         </div>
 
-        <h4 style="font-size:14px;font-weight:700;color:#475569;margin:6px 0 10px;text-transform:uppercase;letter-spacing:0.5px;">
-          <span data-en="📝 Text Content" data-zh="📝 文字內容">📝 Text Content</span>
-        </h4>
+        <div class="sub-label">📝 Text Content <span class="zh">文字內容</span></div>
         <table class="limit-table">
           <tbody>
             <tr>
-              <td data-en="Body Text" data-zh="內文">Body Text</td>
-              <td data-en="1,024 characters" data-zh="1,024 字數">1,024 characters</td>
+              <td>Body Text<span class="zh">內文</span></td>
+              <td>1,024 characters<span class="zh">字數</span></td>
             </tr>
             <tr>
-              <td data-en="Header (Text only)" data-zh="標題（純文字）">Header (Text only)</td>
-              <td data-en="60 characters" data-zh="60 字數">60 characters</td>
+              <td>Header (Text only)<span class="zh">標題（純文字）</span></td>
+              <td>60 characters<span class="zh">字數</span></td>
             </tr>
             <tr>
-              <td data-en="Footer" data-zh="頁尾">Footer</td>
-              <td data-en="60 characters" data-zh="60 字數">60 characters</td>
+              <td>Footer<span class="zh">頁尾</span></td>
+              <td>60 characters<span class="zh">字數</span></td>
             </tr>
             <tr>
-              <td data-en="Template Name (lowercase alphanumeric + underscores only)" data-zh="模板名稱（僅限小寫英數字與底線）">Template Name (lowercase alphanumeric + underscores only)</td>
-              <td data-en="512 characters" data-zh="512 字數">512 characters</td>
+              <td>Template Name (lowercase alphanumeric + underscores)<span class="zh">模板名稱（僅限小寫英數字與底線）</span></td>
+              <td>512 characters<span class="zh">字數</span></td>
             </tr>
           </tbody>
         </table>
 
-        <h4 style="font-size:14px;font-weight:700;color:#475569;margin:22px 0 10px;text-transform:uppercase;letter-spacing:0.5px;">
-          <span data-en="📎 Media / Attachment Header" data-zh="📎 媒體／附件標題">📎 Media / Attachment Header</span>
-        </h4>
+        <div class="sub-label">📎 Media / Attachment Header <span class="zh">媒體／附件標題</span></div>
         <table class="limit-table">
           <tbody>
             <tr>
-              <td data-en="Attachments per message" data-zh="每則訊息附件數量">Attachments per message</td>
-              <td data-en="1 only" data-zh="僅限 1 個">1 only</td>
+              <td><strong>Attachments per message</strong><span class="zh">每則訊息附件數量</span></td>
+              <td><strong style="color:#dc2626;">1 only</strong><span class="zh">僅限 1 個</span></td>
             </tr>
             <tr>
-              <td data-en="🖼️ Image (.jpg / .png)" data-zh="🖼️ 圖片（.jpg / .png）">🖼️ Image (.jpg / .png)</td>
-              <td data-en="Max 5 MB" data-zh="上限 5 MB">Max 5 MB</td>
+              <td>🖼️ Image (.jpg / .png)<span class="zh">圖片</span></td>
+              <td>Max 5 MB<span class="zh">上限</span></td>
             </tr>
             <tr>
-              <td data-en="🎬 Video (.mp4 / .3gpp — H.264 + AAC)" data-zh="🎬 影片（.mp4 / .3gpp — 需 H.264 + AAC 編碼）">🎬 Video (.mp4 / .3gpp — H.264 + AAC)</td>
-              <td data-en="Max 16 MB" data-zh="上限 16 MB">Max 16 MB</td>
+              <td>🎬 Video (.mp4 / .3gpp — H.264 + AAC)<span class="zh">影片（需 H.264 + AAC 編碼）</span></td>
+              <td>Max 16 MB<span class="zh">上限</span></td>
             </tr>
             <tr>
-              <td data-en="📄 Document (.pdf / .docx / .xlsx / .pptx / .txt)" data-zh="📄 文件（.pdf / .docx / .xlsx / .pptx / .txt）">📄 Document (.pdf / .docx / .xlsx / .pptx / .txt)</td>
-              <td data-en="Max 100 MB" data-zh="上限 100 MB">Max 100 MB</td>
+              <td>📄 Document (.pdf / .docx / .xlsx / .pptx / .txt)<span class="zh">文件</span></td>
+              <td>Max 100 MB<span class="zh">上限</span></td>
             </tr>
             <tr>
-              <td data-en="🎵 Audio (.aac / .mp3 / .amr / .ogg)" data-zh="🎵 音訊（.aac / .mp3 / .amr / .ogg）">🎵 Audio (.aac / .mp3 / .amr / .ogg)</td>
-              <td data-en="Max 16 MB" data-zh="上限 16 MB">Max 16 MB</td>
+              <td>🎵 Audio (.aac / .mp3 / .amr / .ogg)<span class="zh">音訊</span></td>
+              <td>Max 16 MB<span class="zh">上限</span></td>
             </tr>
             <tr>
-              <td data-en="😀 Sticker — Static (.webp)" data-zh="😀 貼圖 — 靜態（.webp）">😀 Sticker — Static (.webp)</td>
-              <td data-en="Max 100 KB" data-zh="上限 100 KB">Max 100 KB</td>
+              <td>😀 Sticker — Static (.webp)<span class="zh">靜態貼圖</span></td>
+              <td>Max 100 KB<span class="zh">上限</span></td>
             </tr>
             <tr>
-              <td data-en="🎞️ Sticker — Animated (.webp)" data-zh="🎞️ 貼圖 — 動態（.webp）">🎞️ Sticker — Animated (.webp)</td>
-              <td data-en="Max 500 KB" data-zh="上限 500 KB">Max 500 KB</td>
+              <td>🎞️ Sticker — Animated (.webp)<span class="zh">動態貼圖</span></td>
+              <td>Max 500 KB<span class="zh">上限</span></td>
             </tr>
           </tbody>
         </table>
 
-        <h4 style="font-size:14px;font-weight:700;color:#475569;margin:22px 0 10px;text-transform:uppercase;letter-spacing:0.5px;">
-          <span data-en="🔘 Button Limits (Critical)" data-zh="🔘 按鈕限制（重要）">🔘 Button Limits (Critical)</span>
-        </h4>
+        <div class="sub-label">🔘 Button Limits (Critical) <span class="zh">按鈕限制（重要）</span></div>
         <table>
           <thead>
             <tr>
-              <th data-en="Button Type" data-zh="按鈕類型">Button Type</th>
-              <th data-en="Max per Template" data-zh="單一模板上限">Max per Template</th>
-              <th data-en="Label Text Limit" data-zh="文字字數上限">Label Text Limit</th>
+              <th>Button Type <span class="zh">按鈕類型</span></th>
+              <th>Max per Template <span class="zh">上限</span></th>
+              <th>Label Limit <span class="zh">文字上限</span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td data-en="💬 Quick Reply" data-zh="💬 快速回覆（Quick Reply）">💬 Quick Reply</td>
-              <td data-en="Up to 3 displayed" data-zh="最多顯示 3 個">Up to 3 displayed</td>
-              <td data-en="20 characters" data-zh="20 字數">20 characters</td>
+              <td>💬 Quick Reply<span class="zh">快速回覆</span></td>
+              <td>Up to 3 displayed<span class="zh">最多顯示 3 個</span></td>
+              <td>20 characters<span class="zh">字數</span></td>
             </tr>
             <tr>
-              <td data-en="🔗 Call-to-Action (URL / Phone)" data-zh="🔗 行動呼籲（網址／電話）">🔗 Call-to-Action (URL / Phone)</td>
-              <td data-en="Max 2" data-zh="最多 2 個">Max 2</td>
-              <td data-en="25 characters" data-zh="25 字數">25 characters</td>
+              <td>🔗 Call-to-Action (URL / Phone)<span class="zh">行動呼籲（網址／電話）</span></td>
+              <td>Max 2<span class="zh">最多 2 個</span></td>
+              <td>25 characters<span class="zh">字數</span></td>
             </tr>
             <tr>
-              <td data-en="🔀 Combined (Quick Reply + CTA mix)" data-zh="🔀 混合（快速回覆 + CTA）">🔀 Combined (Quick Reply + CTA mix)</td>
-              <td data-en="Max 10 total" data-zh="合計最多 10 個">Max 10 total</td>
-              <td data-en="Per type above" data-zh="依上方各類規則">Per type above</td>
+              <td>🔀 Combined (Quick Reply + CTA mix)<span class="zh">混合（快速回覆 + CTA）</span></td>
+              <td>Max 10 total<span class="zh">合計最多 10 個</span></td>
+              <td>Per type above<span class="zh">依各類規則</span></td>
             </tr>
             <tr>
-              <td data-en="🔐 Copy Code / One-Tap OTP (Authentication only)" data-zh="🔐 複製驗證碼／一鍵 OTP（僅驗證類）">🔐 Copy Code / One-Tap OTP (Authentication only)</td>
-              <td data-en="1 per template" data-zh="每個模板 1 個">1 per template</td>
-              <td data-en="25 characters" data-zh="25 字數">25 characters</td>
+              <td>🔐 Copy Code / One-Tap OTP<span class="zh">複製驗證碼／一鍵 OTP（僅驗證類）</span></td>
+              <td>1 per template<span class="zh">每個模板 1 個</span></td>
+              <td>25 characters<span class="zh">字數</span></td>
             </tr>
           </tbody>
         </table>
 
         <div class="note">
-          <strong data-en="⚠️ Button Display Rule:" data-zh="⚠️ 按鈕顯示規則：">⚠️ Button Display Rule:</strong>
-          <span data-en=' If a template has more than 3 buttons, only 2 will show on the message — the rest collapse under a "See all options" button that the user must tap to expand.' data-zh=' 若模板按鈕超過 3 個，訊息上僅會顯示 2 個，其餘會收合至「查看全部選項」（See all options）按鈕，使用者需點擊才能展開。'> If a template has more than 3 buttons, only 2 will show on the message — the rest collapse under a "See all options" button that the user must tap to expand.</span>
+          <strong>⚠️ Button Display Rule:</strong> If a template has more than 3 buttons, only 2 will show on the message — the rest collapse under a "See all options" button that the user must tap to expand.
+          <span class="zh">若模板按鈕超過 3 個，訊息上僅會顯示 2 個，其餘會收合至「查看全部選項」按鈕，使用者需點擊才能展開。</span>
         </div>
 
         <div class="note red">
-          <strong data-en="🔒 Jan 1, 2026 Rule:" data-zh="🔒 2026 年 1 月 1 日新規：">🔒 Jan 1, 2026 Rule:</strong>
-          <span data-en=" All templates must include valid and verifiable HTTPS URLs in the message body or Call-to-Action (CTA) buttons. Non-HTTPS or broken URLs will cause template rejection." data-zh=" 所有模板的內文或 CTA 按鈕都必須使用合法且可驗證的 HTTPS 網址，非 HTTPS 或無效連結的模板將被駁回。"> All templates must include valid and verifiable HTTPS URLs in the message body or Call-to-Action (CTA) buttons. Non-HTTPS or broken URLs will cause template rejection.</span>
+          <strong>🔒 Jan 1, 2026 Rule:</strong> All templates must include valid and verifiable HTTPS URLs in the message body or CTA buttons. Non-HTTPS or broken URLs will cause template rejection.
+          <span class="zh">所有模板的內文或 CTA 按鈕都必須使用合法且可驗證的 HTTPS 網址，非 HTTPS 或無效連結的模板將被駁回。</span>
         </div>
       </div>
 
-      <!-- Section 4: Throughput -->
+      <!-- Section 4 -->
       <div class="section">
         <div class="section-title">
           <div class="section-number">4</div>
-          <span data-en="Sending Throughput (Speed)" data-zh="發送速度（Throughput）">Sending Throughput (Speed)</span>
+          <div>Sending Throughput (Speed)<span class="zh">發送速度（Throughput）</span></div>
         </div>
         <div class="grid-2">
           <div class="card">
-            <div class="card-label" data-en="Standard Throughput" data-zh="標準發送速度">Standard Throughput</div>
+            <div class="card-label">Standard Throughput <span class="zh">標準發送速度</span></div>
             <div class="card-value">~80 MPS</div>
-            <div class="card-desc" data-en="Messages per second — default for most accounts" data-zh="每秒訊息數 — 多數帳號預設值">Messages per second — default for most accounts</div>
+            <div class="card-desc">Messages per second — default for most accounts<span class="zh">每秒訊息數 — 多數帳號預設值</span></div>
           </div>
           <div class="card">
-            <div class="card-label" data-en="Enterprise (Tier 4)" data-zh="企業級（Tier 4）">Enterprise (Tier 4)</div>
-            <div class="card-value" data-en="Up to 1,000 MPS" data-zh="最高 1,000 MPS">Up to 1,000 MPS</div>
-            <div class="card-desc" data-en="Automatically upgraded for Tier 4 accounts" data-zh="Tier 4 帳號自動升級">Automatically upgraded for Tier 4 accounts</div>
+            <div class="card-label">Enterprise (Tier 4) <span class="zh">企業級</span></div>
+            <div class="card-value">Up to 1,000 MPS</div>
+            <div class="card-desc">Automatically upgraded for Tier 4 accounts<span class="zh">Tier 4 帳號自動升級</span></div>
           </div>
         </div>
       </div>
 
-      <!-- Section 5: Quality Rating -->
+      <!-- Section 5 -->
       <div class="section">
         <div class="section-title">
           <div class="section-number">5</div>
-          <span data-en="Quality Rating" data-zh="品質評級">Quality Rating</span>
+          <div>Quality Rating<span class="zh">品質評級</span></div>
         </div>
         <div class="quality-grid">
           <div class="quality-card q-green">
             <span class="dot"></span>
-            <span style="font-weight:700;color:#166534" data-en="Green (High)" data-zh="綠燈（高）">Green (High)</span>
-            <div class="q-title" data-en="Healthy" data-zh="健康">Healthy</div>
-            <div class="q-desc" data-en="Low block/spam rate. Eligible to scale tier up." data-zh="封鎖／檢舉率低，可繼續升級至更高層級。">Low block/spam rate. Eligible to scale tier up.</div>
+            <span style="font-weight:700;color:#166534">Green (High)</span>
+            <div class="q-title">Healthy <span class="zh">健康</span></div>
+            <div class="q-desc">Low block/spam rate. Eligible to scale tier up.<span class="zh">封鎖／檢舉率低，可繼續升級至更高層級。</span></div>
           </div>
           <div class="quality-card q-yellow">
             <span class="dot"></span>
-            <span style="font-weight:700;color:#854d0e" data-en="Yellow (Medium)" data-zh="黃燈（中）">Yellow (Medium)</span>
-            <div class="q-title" data-en="Warning" data-zh="警告">Warning</div>
-            <div class="q-desc" data-en="Quality drop detected. Review templates and sending patterns." data-zh="品質下滑，請檢視模板內容與發送策略。">Quality drop detected. Review templates and sending patterns.</div>
+            <span style="font-weight:700;color:#854d0e">Yellow (Medium)</span>
+            <div class="q-title">Warning <span class="zh">警告</span></div>
+            <div class="q-desc">Quality drop detected. Review templates and sending patterns.<span class="zh">品質下滑，請檢視模板內容與發送策略。</span></div>
           </div>
           <div class="quality-card q-red">
             <span class="dot"></span>
-            <span style="font-weight:700;color:#991b1b" data-en="Red (Low)" data-zh="紅燈（低）">Red (Low)</span>
-            <div class="q-title" data-en="Critical" data-zh="危險">Critical</div>
-            <div class="q-desc" data-en="High block/spam rate. Cannot advance to next tier." data-zh="封鎖／檢舉率過高，無法升級至下一層級。">High block/spam rate. Cannot advance to next tier.</div>
+            <span style="font-weight:700;color:#991b1b">Red (Low)</span>
+            <div class="q-title">Critical <span class="zh">危險</span></div>
+            <div class="q-desc">High block/spam rate. Cannot advance to next tier.<span class="zh">封鎖／檢舉率過高，無法升級至下一層級。</span></div>
           </div>
         </div>
         <div class="note green">
-          <strong data-en="2026 Update:" data-zh="2026 更新：">2026 Update:</strong>
-          <span data-en=" A Red rating no longer automatically downgrades your limit — as long as there are no policy violations. It only blocks upward tier advancement." data-zh=" 若無違規，紅燈評級不再自動下調發送上限，但仍會阻擋向上升級。"> A Red rating no longer automatically downgrades your limit — as long as there are no policy violations. It only blocks upward tier advancement.</span>
+          <strong>2026 Update:</strong> A Red rating no longer automatically downgrades your limit — as long as there are no policy violations. It only blocks upward tier advancement.
+          <span class="zh">若無違規，紅燈評級不再自動下調發送上限，但仍會阻擋向上升級。</span>
         </div>
       </div>
 
-      <!-- Section 6: Template Categories (Meta Official) -->
+      <!-- Section 6 -->
       <div class="section">
         <div class="section-title">
           <div class="section-number">6</div>
-          <span data-en="Template Categories (Meta Official Guidelines)" data-zh="模板類別（Meta 官方指南）">Template Categories (Meta Official Guidelines)</span>
+          <div>Template Categories (Meta Official Guidelines)<span class="zh">模板類別（Meta 官方指南）</span></div>
         </div>
         <div class="grid-3" style="margin-bottom:16px;">
-          <div class="card" style="border-top:4px solid #ec4899;">
-            <div class="card-label" style="color:#be185d;">📢 <span data-en="Marketing" data-zh="行銷（Marketing）">Marketing</span></div>
-            <div class="card-value" style="font-size:15px;color:#be185d;line-height:1.4;margin-top:6px;" data-en="Promotions, offers, launches, retargeting" data-zh="促銷、優惠、新品、再行銷">Promotions, offers, launches, retargeting</div>
-            <div class="card-desc" style="margin-top:10px;" data-en="Examples: sale announcements, coupons, abandoned cart, newsletters, product launches, cross-sells." data-zh="範例：促銷通知、優惠券、購物車挽回、電子報、新品上架、交叉推薦。">Examples: sale announcements, coupons, abandoned cart, newsletters, product launches, cross-sells.</div>
+          <div class="card cat-card" style="border-top:4px solid #ec4899;">
+            <div class="card-label" style="color:#be185d;">📢 Marketing <span class="zh">行銷</span></div>
+            <div class="card-value" style="font-size:15px;color:#be185d;line-height:1.4;margin-top:6px;">Promotions, offers, launches, retargeting</div>
+            <div class="card-desc" style="margin-top:10px;">Examples: sale announcements, coupons, abandoned cart, newsletters, product launches, cross-sells.<span class="zh">範例：促銷通知、優惠券、購物車挽回、電子報、新品上架、交叉推薦。</span></div>
           </div>
-          <div class="card" style="border-top:4px solid #3b82f6;">
-            <div class="card-label" style="color:#1e40af;">⚙️ <span data-en="Utility" data-zh="實用（Utility）">Utility</span></div>
-            <div class="card-value" style="font-size:15px;color:#1e40af;line-height:1.4;margin-top:6px;" data-en="Transaction / account updates triggered by user" data-zh="交易或帳戶通知，由用戶動作觸發">Transaction / account updates triggered by user</div>
-            <div class="card-desc" style="margin-top:10px;" data-en="Examples: order confirmation, shipping update, payment receipt, appointment reminder, account alerts." data-zh="範例：訂單確認、出貨通知、付款收據、預約提醒、帳戶異動通知。">Examples: order confirmation, shipping update, payment receipt, appointment reminder, account alerts.</div>
+          <div class="card cat-card" style="border-top:4px solid #3b82f6;">
+            <div class="card-label" style="color:#1e40af;">⚙️ Utility <span class="zh">實用</span></div>
+            <div class="card-value" style="font-size:15px;color:#1e40af;line-height:1.4;margin-top:6px;">Transaction / account updates triggered by user</div>
+            <div class="card-desc" style="margin-top:10px;">Examples: order confirmation, shipping update, payment receipt, appointment reminder, account alerts.<span class="zh">範例：訂單確認、出貨通知、付款收據、預約提醒、帳戶異動通知。</span></div>
           </div>
-          <div class="card" style="border-top:4px solid #8b5cf6;">
-            <div class="card-label" style="color:#6b21a8;">🔐 <span data-en="Authentication" data-zh="驗證（Authentication）">Authentication</span></div>
-            <div class="card-value" style="font-size:15px;color:#6b21a8;line-height:1.4;margin-top:6px;" data-en="One-time passcodes for identity verification only" data-zh="一次性密碼（OTP），僅用於身份驗證">One-time passcodes for identity verification only</div>
-            <div class="card-desc" style="margin-top:10px;" data-en="Must use Cloud API Template Library. Supports copy-code or one-tap OTP button. Marketing/Utility cannot send OTPs." data-zh="必須使用 Cloud API Template Library，支援複製驗證碼或一鍵驗證按鈕。行銷／實用類模板不可發送 OTP。">Must use Cloud API Template Library. Supports copy-code or one-tap OTP button. Marketing/Utility cannot send OTPs.</div>
+          <div class="card cat-card" style="border-top:4px solid #8b5cf6;">
+            <div class="card-label" style="color:#6b21a8;">🔐 Authentication <span class="zh">驗證</span></div>
+            <div class="card-value" style="font-size:15px;color:#6b21a8;line-height:1.4;margin-top:6px;">One-time passcodes for identity verification only</div>
+            <div class="card-desc" style="margin-top:10px;">Must use Cloud API Template Library. Supports copy-code or one-tap OTP button. Marketing/Utility cannot send OTPs.<span class="zh">必須使用 Cloud API Template Library，支援複製驗證碼或一鍵驗證按鈕。行銷／實用類模板不可發送 OTP。</span></div>
           </div>
         </div>
 
         <table style="margin-top:10px;">
           <thead>
             <tr>
-              <th data-en="⚠️ Common Miscategorization Mistakes" data-zh="⚠️ 常見分類錯誤">⚠️ Common Miscategorization Mistakes</th>
-              <th data-en="What Meta Does" data-zh="Meta 的處理方式">What Meta Does</th>
+              <th>⚠️ Common Miscategorization Mistakes <span class="zh">常見分類錯誤</span></th>
+              <th>What Meta Does <span class="zh">Meta 的處理方式</span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td data-en='Adding "Check out our new items" to a receipt (Utility template)' data-zh='在收據（實用模板）加入「查看最新商品」字樣'>Adding "Check out our new items" to a receipt (Utility template)</td>
-              <td data-en="Auto-reclassified as Marketing → higher cost" data-zh="自動歸類為行銷 → 費用提高">Auto-reclassified as Marketing → higher cost</td>
+              <td>Adding "Check out our new items" to a receipt (Utility template)<span class="zh">在收據（實用模板）加入「查看最新商品」字樣</span></td>
+              <td>Auto-reclassified as Marketing → higher cost<span class="zh">自動歸類為行銷 → 費用提高</span></td>
             </tr>
             <tr>
-              <td data-en="Including promotional CTAs inside support/service messages" data-zh="在客服／服務訊息中加入促銷連結或按鈕">Including promotional CTAs inside support/service messages</td>
-              <td data-en="Template rejected or reclassified" data-zh="模板被駁回或重新分類">Template rejected or reclassified</td>
+              <td>Including promotional CTAs inside support/service messages<span class="zh">在客服／服務訊息中加入促銷連結或按鈕</span></td>
+              <td>Template rejected or reclassified<span class="zh">模板被駁回或重新分類</span></td>
             </tr>
             <tr>
-              <td data-en="Using Utility template to send OTP / verification code" data-zh="使用實用模板發送 OTP／驗證碼">Using Utility template to send OTP / verification code</td>
-              <td data-en="Blocked — only Authentication category allowed" data-zh="封鎖 — 僅驗證類模板可發送">Blocked — only Authentication category allowed</td>
+              <td>Using Utility template to send OTP / verification code<span class="zh">使用實用模板發送 OTP／驗證碼</span></td>
+              <td>Blocked — only Authentication allowed<span class="zh">封鎖 — 僅驗證類模板可發送</span></td>
             </tr>
             <tr>
-              <td data-en="Promotional intent not 'specific to user action'" data-zh="內容不符「針對用戶動作觸發」的規則">Promotional intent not 'specific to user action'</td>
-              <td data-en="Fails utility test → Marketing category" data-zh="無法通過實用類驗證 → 歸為行銷">Fails utility test → Marketing category</td>
+              <td>Promotional intent not 'specific to user action'<span class="zh">內容不符「針對用戶動作觸發」的規則</span></td>
+              <td>Fails utility test → Marketing category<span class="zh">無法通過實用類驗證 → 歸為行銷</span></td>
             </tr>
           </tbody>
         </table>
 
         <div class="note red">
-          <strong data-en="April 2025 Enforcement:" data-zh="2025 年 4 月起實施：">April 2025 Enforcement:</strong>
-          <span data-en=" If a business selects UTILITY but Meta determines it should be MARKETING, the template is auto-approved as MARKETING (different pricing). For businesses abusing the categorization system, the prior 24-hour notice before reclassification is NO LONGER given — effective April 16, 2025." data-zh=" 若商家選擇 UTILITY 但 Meta 判定為 MARKETING，模板會直接改以 MARKETING 核准（收費不同）。對於濫用分類系統的商家，自 2025 年 4 月 16 日起，不再提供先前的 24 小時預告。"> If a business selects UTILITY but Meta determines it should be MARKETING, the template is auto-approved as MARKETING (different pricing). For businesses abusing the categorization system, the prior 24-hour notice before reclassification is NO LONGER given — effective April 16, 2025.</span>
+          <strong>April 2025 Enforcement:</strong> If a business selects UTILITY but Meta determines it should be MARKETING, the template is auto-approved as MARKETING (different pricing). For businesses abusing the categorization system, the prior 24-hour notice before reclassification is NO LONGER given — effective April 16, 2025.
+          <span class="zh">若商家選擇 UTILITY 但 Meta 判定為 MARKETING，模板會直接改以 MARKETING 核准（收費不同）。對於濫用分類系統的商家，自 2025 年 4 月 16 日起，不再提供先前的 24 小時預告。</span>
         </div>
 
         <div class="note">
-          <strong data-en="📄 Official Meta Documentation:" data-zh="📄 Meta 官方文件：">📄 Official Meta Documentation:</strong>
-          <span data-en=" " data-zh=" "> </span>
-          <a href="https://developers.facebook.com/docs/whatsapp/updates-to-pricing/new-template-guidelines/" target="_blank" style="color:#128C7E;font-weight:600;text-decoration:underline;">developers.facebook.com/docs/whatsapp/updates-to-pricing/new-template-guidelines</a>
-          <span data-en=" · Utility template rules: " data-zh="　·　實用類模板規則："> · Utility template rules: </span>
+          <strong>📄 Official Meta Documentation:</strong>
+          <a href="https://developers.facebook.com/docs/whatsapp/updates-to-pricing/new-template-guidelines/" target="_blank" style="color:#128C7E;font-weight:600;text-decoration:underline;">Template Category Guidelines</a>
+          &middot;
           <a href="https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates/" target="_blank" style="color:#128C7E;font-weight:600;text-decoration:underline;">Message Templates API</a>
+          <span class="zh">Meta 官方文件連結</span>
         </div>
       </div>
 
-      <!-- Section 7: 2026 Key Updates -->
+      <!-- Section 7 -->
       <div class="section">
         <div class="section-title">
           <div class="section-number">7</div>
-          <span data-en="2026 Key Updates & Compliance" data-zh="2026 重要更新與合規事項">2026 Key Updates & Compliance</span>
+          <div>2026 Key Updates & Compliance<span class="zh">2026 重要更新與合規事項</span></div>
         </div>
         <ul class="update-list">
           <li>
-            <strong data-en="🚀 Fast-Track to 100K Limit" data-zh="🚀 直升 100K 訊息上限">🚀 Fast-Track to 100K Limit</strong>
-            <span data-en="Once a business completes Business Verification or the Quality scaling path, the 100K daily messaging limit is granted immediately. Rollout began Q1 2026, with pacing restrictions fully removed Q2 2026." data-zh="完成商家驗證或通過品質擴展路徑後，可立即獲得 10 萬則／日上限。2026 第一季開始推出，第二季全面取消 pacing 限制。">Once a business completes Business Verification or the Quality scaling path, the 100K daily messaging limit is granted immediately. Rollout began Q1 2026, with pacing restrictions fully removed Q2 2026.</span>
+            <strong>🚀 Fast-Track to 100K Limit <span class="zh">直升 100K 訊息上限</span></strong>
+            Once a business completes Business Verification or the Quality scaling path, the 100K daily messaging limit is granted immediately. Rollout began Q1 2026, with pacing restrictions fully removed Q2 2026.
+            <span class="zh">完成商家驗證或通過品質擴展路徑後，可立即獲得 10 萬則／日上限。2026 第一季開始推出，第二季全面取消 pacing 限制。</span>
           </li>
           <li>
-            <strong data-en="🚫 General Purpose AI Chatbots Banned" data-zh="🚫 禁止通用型 AI 聊天機器人">🚫 General Purpose AI Chatbots Banned</strong>
-            <span data-en="Since January 15, 2026, Meta has banned General Purpose AI Chatbots on WhatsApp to keep the platform focused as a business channel. Business-specific AI is still allowed." data-zh="自 2026 年 1 月 15 日起，Meta 禁止通用型 AI 聊天機器人進駐 WhatsApp，以維持其商業通訊定位。特定商家用途的 AI 仍允許使用。">Since January 15, 2026, Meta has banned General Purpose AI Chatbots on WhatsApp to keep the platform focused as a business channel. Business-specific AI is still allowed.</span>
+            <strong>🚫 General Purpose AI Chatbots Banned <span class="zh">禁止通用型 AI 聊天機器人</span></strong>
+            Since January 15, 2026, Meta has banned General Purpose AI Chatbots on WhatsApp to keep the platform focused as a business channel. Business-specific AI is still allowed.
+            <span class="zh">自 2026 年 1 月 15 日起，Meta 禁止通用型 AI 聊天機器人進駐 WhatsApp，以維持其商業通訊定位。特定商家用途的 AI 仍允許使用。</span>
           </li>
           <li>
-            <strong data-en="🇺🇸 US (+1) Marketing Templates Blocked" data-zh="🇺🇸 美國（+1）行銷模板封鎖中">🇺🇸 US (+1) Marketing Templates Blocked</strong>
-            <span data-en="Since April 2025, marketing templates to US +1 numbers are not delivered. Utility and authentication templates continue to work normally." data-zh="自 2025 年 4 月起，發送至美國 +1 號碼的行銷模板將無法送達。實用型（Utility）與驗證型（Authentication）模板仍可正常使用。">Since April 2025, marketing templates to US +1 numbers are not delivered. Utility and authentication templates continue to work normally.</span>
+            <strong>🇺🇸 US (+1) Marketing Templates Blocked <span class="zh">美國（+1）行銷模板封鎖中</span></strong>
+            Since April 2025, marketing templates to US +1 numbers are not delivered. Utility and authentication templates continue to work normally.
+            <span class="zh">自 2025 年 4 月起，發送至美國 +1 號碼的行銷模板將無法送達。實用型與驗證型模板仍可正常使用。</span>
           </li>
           <li>
-            <strong data-en="⏱️ Per-User Marketing Cap" data-zh="⏱️ 每位用戶行銷訊息上限">⏱️ Per-User Marketing Cap</strong>
-            <span data-en="Select countries enforce a limit of 1 marketing template per 24 hours to the same recipient. Combined with global frequency capping (~2 marketing msgs/day total)." data-zh="部分國家規定同一收件人 24 小時內僅能收到 1 則行銷模板，再加上全球頻率限制（每日合計約 2 則行銷訊息）。">Select countries enforce a limit of 1 marketing template per 24 hours to the same recipient. Combined with global frequency capping (~2 marketing msgs/day total).</span>
+            <strong>⏱️ Per-User Marketing Cap <span class="zh">每位用戶行銷訊息上限</span></strong>
+            Select countries enforce a limit of 1 marketing template per 24 hours to the same recipient. Combined with global frequency capping (~2 marketing msgs/day total).
+            <span class="zh">部分國家規定同一收件人 24 小時內僅能收到 1 則行銷模板，再加上全球頻率限制（每日合計約 2 則行銷訊息）。</span>
           </li>
           <li>
-            <strong data-en="⚠️ Category Mismatch = Rejection" data-zh="⚠️ 類別不符 = 自動駁回">⚠️ Category Mismatch = Rejection</strong>
-            <span data-en="Promotional content inside Utility templates will be rejected. Template category must match the actual content — Meta actively enforces this." data-zh="若實用型模板內含促銷內容，將被自動駁回。模板類別必須與實際內容相符，Meta 會嚴格審查。">Promotional content inside Utility templates will be rejected. Template category must match the actual content — Meta actively enforces this.</span>
+            <strong>⚠️ Category Mismatch = Rejection <span class="zh">類別不符 = 自動駁回</span></strong>
+            Promotional content inside Utility templates will be rejected. Template category must match the actual content — Meta actively enforces this.
+            <span class="zh">若實用型模板內含促銷內容，將被自動駁回。模板類別必須與實際內容相符，Meta 會嚴格審查。</span>
           </li>
         </ul>
       </div>
@@ -685,22 +674,9 @@
     </div>
 
     <div class="footer">
-      <span data-en="Source: Meta for Developers — WhatsApp Business Platform Documentation · Prepared by ChatDaddy CS" data-zh="資料來源：Meta for Developers — WhatsApp Business Platform 官方文件 · ChatDaddy CS 整理">Source: Meta for Developers — WhatsApp Business Platform Documentation · Prepared by ChatDaddy CS</span>
+      Source: Meta for Developers — WhatsApp Business Platform Documentation &middot; Prepared by ChatDaddy CS<br>
+      資料來源：Meta for Developers — WhatsApp Business Platform 官方文件 &middot; ChatDaddy CS 整理
     </div>
   </div>
-
-<script>
-  function setLang(lang) {
-    document.querySelectorAll('[data-en]').forEach(el => {
-      el.textContent = el.getAttribute('data-' + lang);
-      el.classList.remove('tab-transition');
-      void el.offsetWidth;
-      el.classList.add('tab-transition');
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
-  }
-</script>
 </body>
 </html>
